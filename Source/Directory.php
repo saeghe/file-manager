@@ -2,6 +2,8 @@
 
 namespace Saeghe\FileManager\Directory;
 
+use function Saeghe\FileManager\File\preserve_copy as preserve_copy_file;
+
 function chmod(string $path, int $permission): bool
 {
     $old_umask = umask(0);
@@ -94,6 +96,26 @@ function permission(string $path): int
 function preserve_copy(string $origin, string $destination): bool
 {
     return make($destination, permission($origin));
+}
+
+function preserve_copy_recursively(string $origin, string $destination): bool
+{
+    $result = true;
+
+    foreach (ls_all($origin) as $item) {
+        if (! $result) {
+            break;
+        }
+
+        $origin_item = $origin . DIRECTORY_SEPARATOR . $item;
+        $destination_item = $destination . DIRECTORY_SEPARATOR . $item;
+
+        $result = is_dir($origin_item)
+            ? (preserve_copy($origin_item, $destination_item) && preserve_copy_recursively($origin_item, $destination_item))
+            : preserve_copy_file($origin_item, $destination_item);
+    }
+
+    return $result;
 }
 
 function renew(string $path): void
