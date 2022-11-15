@@ -18,6 +18,11 @@ class Path extends Text
         return new static(Resolver\realpath($path_string));
     }
 
+    public function append(string $path): Path
+    {
+        return Path::from_string($this . DIRECTORY_SEPARATOR . $path);
+    }
+
     public function as_file(): File
     {
         return new File($this);

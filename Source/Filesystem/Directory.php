@@ -33,6 +33,11 @@ class Directory implements \Stringable
         return $this->path->string();
     }
 
+    public function append(string $path): Path
+    {
+        return Path::from_string($this . DIRECTORY_SEPARATOR . $path);
+    }
+
     public function chmod(int $permission): self
     {
         chmod($this->path, $permission);

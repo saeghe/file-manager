@@ -7,11 +7,6 @@ use Saeghe\FileManager\Path;
 
 trait Address
 {
-    public function append(string $path): Path
-    {
-        return Path::from_string($this . DIRECTORY_SEPARATOR . $path);
-    }
-
     public function exists(): bool
     {
         return \file_exists($this);
