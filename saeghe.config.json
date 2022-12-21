@@ -8,7 +8,7 @@
     "executables": [],
     "packages-directory": "Packages",
     "packages": {
-        "git@github.com:saeghe\/test-runner.git": "v3.0.0",
-        "git@github.com:saeghe\/datatype.git": "v1.0.0"
+        "git@github.com:saeghe\/test-runner.git": "v3.0.1",
+        "git@github.com:saeghe\/datatype.git": "v2.0.0"
     }
 }

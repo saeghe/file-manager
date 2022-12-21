@@ -235,7 +235,7 @@ test(
             assert_true(false, 'code should not reach to this point');
         } catch (\Exception $exception) {
             assert_true($exception instanceof \InvalidArgumentException);
-            assert_true('Invalid string passed to text.' === $exception->getMessage());
+            assert_true('Invalid string passed to path.' === $exception->getMessage());
         }
     }
 );
@@ -256,7 +256,7 @@ test(
             assert_true(false, 'code should not reach to this point');
         } catch (\Exception $exception) {
             assert_true($exception instanceof \InvalidArgumentException);
-            assert_true('Invalid string passed to text.' === $exception->getMessage());
+            assert_true('Invalid string passed to path.' === $exception->getMessage());
         }
     }
 );
@@ -278,7 +278,7 @@ test(
             assert_true(false, 'code should not reach to this point');
         } catch (\Exception $exception) {
             assert_true($exception instanceof \InvalidArgumentException);
-            assert_true('Invalid string passed to text.' === $exception->getMessage());
+            assert_true('Invalid string passed to path.' === $exception->getMessage());
         }
     }
 );
