@@ -2,6 +2,7 @@
 
 namespace Saeghe\FileManager;
 
+use InvalidArgumentException;
 use Saeghe\Datatype\Text;
 use Saeghe\FileManager\Filesystem\Address;
 use Saeghe\FileManager\Filesystem\Directory;
@@ -12,6 +13,15 @@ use function Saeghe\Datatype\Str\starts_with_regex;
 class Path extends Text
 {
     use Address;
+
+    public function __construct(?string $init = null)
+    {
+        if (! $this->is_valid($init)) {
+            throw new InvalidArgumentException('Invalid string passed to path.');
+        }
+
+        parent::__construct($init);
+    }
 
     public static function from_string(string $path_string): static
     {

@@ -6,10 +6,18 @@ use Saeghe\Datatype\Text;
 
 class Filename extends Text
 {
-    public function is_valid(string $string): bool
+    public function directory(Directory $root): Directory
     {
-        $minimum = str_starts_with($string, '.') ? 2 : 1;
+        return $root->subdirectory($this);
+    }
 
-        return strlen($string) >= $minimum;
+    public function file(Directory $root): File
+    {
+        return $root->file($this);
+    }
+
+    public function symlink(Directory $root): Symlink
+    {
+        return $root->symlink($this);
     }
 }
