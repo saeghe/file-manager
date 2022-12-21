@@ -45,4 +45,4 @@ jobs:
       - name: Execute tests
         run: |
           cd builds/development
-          php test-runner
+          php ./test-runner
