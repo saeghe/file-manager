@@ -3,11 +3,12 @@
 namespace Saeghe\FileManager\Filesystem;
 
 use Saeghe\FileManager\Path;
+use Stringable;
 use function Saeghe\FileManager\Symlink\delete;
 use function Saeghe\FileManager\Symlink\exists;
 use function Saeghe\FileManager\Symlink\link;
 
-class Symlink implements \Stringable
+class Symlink implements Stringable
 {
     use Address;
 

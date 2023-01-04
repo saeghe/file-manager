@@ -32,7 +32,7 @@ test(
     case: function () {
         $playGround = Path::from_string(root() . 'Tests/PlayGround');
         $directory = $playGround->append('regular');
-        Directory\make($directory, 0775);
+        Directory\make($directory);
         assert_true(0775 === Directory\permission($directory));
         chmod($directory, 0774);
         assert_true(0774 === Directory\permission($directory));

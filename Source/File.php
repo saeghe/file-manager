@@ -2,6 +2,8 @@
 
 namespace Saeghe\FileManager\File;
 
+use Generator;
+
 function chmod(string $path, int $permission): bool
 {
     $old_umask = umask(0);
@@ -41,7 +43,7 @@ function exists(string $path): bool
     return file_exists($path) && ! is_dir($path);
 }
 
-function lines(string $path): \Generator
+function lines(string $path): Generator
 {
     $fileHandler = @fopen($path, "r");
 

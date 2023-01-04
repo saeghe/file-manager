@@ -31,7 +31,7 @@ test(
     case: function () {
         $playGround = Directory::from_string(root() . 'Tests/PlayGround');
         $directory = $playGround->subdirectory('regular');
-        $directory->make(0775);
+        $directory->make();
         assert_true(0775 === $directory->permission());
         chmod($directory, 0774);
         assert_true(0774 === $directory->permission());
