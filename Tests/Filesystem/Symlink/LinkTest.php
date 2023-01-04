@@ -4,6 +4,8 @@ namespace Tests\Filesystem\Symlink\LinkTest;
 
 use Saeghe\FileManager\Filesystem\File;
 use Saeghe\FileManager\Filesystem\Symlink;
+use function file_exists;
+use function readlink;
 use function Saeghe\FileManager\Resolver\root;
 use function Saeghe\TestRunner\Assertions\Boolean\assert_true;
 
@@ -13,8 +15,8 @@ test(
         $response = $symlink->link($file);
         assert_true($symlink->path->string() === $response->path->string());
         assert_true($file->exists());
-        assert_true(\file_exists($symlink));
-        assert_true(\readlink($symlink) === $file->path->string());
+        assert_true(file_exists($symlink));
+        assert_true(readlink($symlink) === $file->path->string());
 
         return [$file, $symlink];
     },

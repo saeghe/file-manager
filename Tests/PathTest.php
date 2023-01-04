@@ -2,6 +2,8 @@
 
 namespace Tests\PathTest;
 
+use Exception;
+use InvalidArgumentException;
 use Saeghe\FileManager\Path;
 use Saeghe\FileManager\Filesystem\Directory;
 use Saeghe\FileManager\Filesystem\File;
@@ -233,8 +235,8 @@ test(
         try {
             new Path('');
             assert_true(false, 'code should not reach to this point');
-        } catch (\Exception $exception) {
-            assert_true($exception instanceof \InvalidArgumentException);
+        } catch (Exception $exception) {
+            assert_true($exception instanceof InvalidArgumentException);
             assert_true('Invalid string passed to path.' === $exception->getMessage());
         }
     }
@@ -254,8 +256,8 @@ test(
         try {
             new Path('root');
             assert_true(false, 'code should not reach to this point');
-        } catch (\Exception $exception) {
-            assert_true($exception instanceof \InvalidArgumentException);
+        } catch (Exception $exception) {
+            assert_true($exception instanceof InvalidArgumentException);
             assert_true('Invalid string passed to path.' === $exception->getMessage());
         }
     }
@@ -276,8 +278,8 @@ test(
         try {
             new Path('ftp:\\');
             assert_true(false, 'code should not reach to this point');
-        } catch (\Exception $exception) {
-            assert_true($exception instanceof \InvalidArgumentException);
+        } catch (Exception $exception) {
+            assert_true($exception instanceof InvalidArgumentException);
             assert_true('Invalid string passed to path.' === $exception->getMessage());
         }
     }

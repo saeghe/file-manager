@@ -2,6 +2,8 @@
 
 namespace Saeghe\FileManager\Symlink;
 
+use function unlink;
+
 function exists(string $path): bool
 {
     return is_link($path);
@@ -19,5 +21,5 @@ function target(string $path): string
 
 function delete(string $path): bool
 {
-    return \unlink($path);
+    return unlink($path);
 }

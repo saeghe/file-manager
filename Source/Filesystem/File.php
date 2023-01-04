@@ -2,7 +2,9 @@
 
 namespace Saeghe\FileManager\Filesystem;
 
+use Generator;
 use Saeghe\FileManager\Path;
+use Stringable;
 use function Saeghe\FileManager\File\chmod;
 use function Saeghe\FileManager\File\content;
 use function Saeghe\FileManager\File\create;
@@ -13,7 +15,7 @@ use function Saeghe\FileManager\File\modify;
 use function Saeghe\FileManager\File\permission;
 use function Saeghe\FileManager\File\preserve_copy;
 
-class File implements \Stringable
+class File implements Stringable
 {
     use Address;
 
@@ -60,7 +62,7 @@ class File implements \Stringable
         return exists($this->path);
     }
 
-    public function lines(): \Generator
+    public function lines(): Generator
     {
         return lines($this->path);
     }

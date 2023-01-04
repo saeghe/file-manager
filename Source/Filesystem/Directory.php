@@ -3,7 +3,9 @@
 namespace Saeghe\FileManager\Filesystem;
 
 use Saeghe\FileManager\Path;
+use Stringable;
 use function Saeghe\FileManager\Directory\chmod;
+use function Saeghe\FileManager\Directory\clean;
 use function Saeghe\FileManager\Directory\delete;
 use function Saeghe\FileManager\Directory\delete_recursive;
 use function Saeghe\FileManager\Directory\exists;
@@ -17,7 +19,7 @@ use function Saeghe\FileManager\Directory\preserve_copy;
 use function Saeghe\FileManager\Directory\renew;
 use function Saeghe\FileManager\Directory\renew_recursive;
 
-class Directory implements \Stringable
+class Directory implements Stringable
 {
     use Address;
 
@@ -41,6 +43,13 @@ class Directory implements \Stringable
     public function chmod(int $permission): self
     {
         chmod($this->path, $permission);
+
+        return $this;
+    }
+
+    public function clean(): self
+    {
+        clean($this->path);
 
         return $this;
     }
@@ -136,6 +145,25 @@ class Directory implements \Stringable
         preserve_copy($this->path, $destination->path);
 
         return $this;
+    }
+
+    public function recursively(): FilesystemTree
+    {
+        $tree = new FilesystemTree($this);
+
+        $add_leaves = function (Directory $vertex) use ($tree, &$add_leaves) {
+            $vertex->ls_all()
+                ->each(function (Directory|File|symlink $object) use ($tree, &$vertex, &$add_leaves) {
+                    $tree->edge($vertex, $object);
+                    if ($object instanceof Directory) {
+                        $add_leaves($object);
+                    }
+                });
+        };
+
+        $add_leaves($this);
+
+        return $tree;
     }
 
     public function renew(): self

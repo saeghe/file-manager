@@ -4,12 +4,13 @@ namespace Saeghe\FileManager\Filesystem;
 
 use Saeghe\Datatype\Str;
 use Saeghe\FileManager\Path;
+use function file_exists;
 
 trait Address
 {
     public function exists(): bool
     {
-        return \file_exists($this);
+        return file_exists($this);
     }
 
     public function leaf(): string
