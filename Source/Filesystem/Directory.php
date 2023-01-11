@@ -153,7 +153,7 @@ class Directory implements Stringable
 
         $add_leaves = function (Directory $vertex) use ($tree, &$add_leaves) {
             $vertex->ls_all()
-                ->each(function (Directory|File|symlink $object) use ($tree, &$vertex, &$add_leaves) {
+                ->each(function (Directory|File|Symlink $object) use ($tree, &$vertex, &$add_leaves) {
                     $tree->edge($vertex, $object);
                     if ($object instanceof Directory) {
                         $add_leaves($object);
